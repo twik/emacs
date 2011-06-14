@@ -9,6 +9,14 @@
 (defadvice terminal-init-xterm (after select-shift-up activate)
   (define-key input-decode-map "\e[1;2A" [S-up]))  ;; fixes Shift-Up text selection
 
+(require 'flymake)
+(setq python-check-command "pyflakes")
+(global-set-key (kbd "RET") 'newline-and-indent)
+
+(mouse-avoidance-mode 'animate)
+;(setq mouse-yank-at-point t)
+;(setq mouse-set-region t)
+
 (require 'mwheel)
 (mouse-wheel-mode 1)
 
@@ -69,10 +77,10 @@
   (kill-buffer (current-buffer)))
 (global-set-key (kbd "C-x k") 'kill-current-buffer)
 
-(require 'highlight-current-line)
-(highlight-current-line-on t)
+;(require 'highlight-current-line)
+;(highlight-current-line-on t)
 ;; To customize the background color of the line
-(set-face-background 'highlight-current-line-face "#333333")
+;(set-face-background 'highlight-current-line-face "#333333")
 
 (setq
   inhibit-startup-message t
@@ -87,6 +95,7 @@
 
 (setq-default truncate-lines t)  ;; disable line wrap
 (setq-default indent-tabs-mode nil)
+(setq default-tab-width 4)
 (global-auto-revert-mode 1)
 (column-number-mode t)
 
@@ -133,7 +142,7 @@
 'fullscreen)
                                            nil
                                            'fullboth)))
-(global-set-key [(M-return)] 'toggle-fullscreen)
+(global-set-key [M-f11] 'toggle-fullscreen)
 
 ;;-------- Toggle modeline,  Command-F12 on Mac
 (defun toggle-mode-line () "toggles the modeline on and off"
@@ -148,7 +157,8 @@
 
 ;; C-F5 toggle line numbers
 (autoload 'linum-mode "linum" "toggle line numbers on/off" t)
-(global-set-key (kbd "<f5>") 'linum-mode)
+;(global-set-key (kbd "<f5>") 'linum-mode)
+(global-set-key (kbd "C-c n") 'linum-mode)
 (setq linum-format "%3d ")  ;; put a space after line number
 (add-hook 'python-mode-hook
   (lambda() (linum-mode 1)))
@@ -165,22 +175,30 @@
 ;(setq mac-command-modifier 'meta)
 ;(setq mac-option-modifier nil)
 
-;(global-set-key [?\A-a] 'mark-whole-buffer)
-;(global-set-key [?\A-s] 'save-buffer)
-;(global-set-key [?\A-S] 'write-file)
-;(global-set-key [?\A-p] 'ps-print-buffer)
-;(global-set-key [?\A-o] 'find-file)
-;(global-set-key [?\A-q] 'save-buffers-kill-emacs)
-;(global-set-key [?\A-w] 'kill-buffer-and-window)
-;(global-set-key [?\A-z] 'undo)
-;(global-set-key [?\A-f] 'isearch-forward)
-;(global-set-key [?\A-g] 'query-replace)
-;(global-set-key [?\A-l] 'goto-line)
-;(global-set-key [?\A-m] 'iconify-frame)
-;(global-set-key [?\A-n] 'new-frame)
+;; Command-Key and Option-Key
+(setq ns-command-modifier (quote meta))
+(setq ns-alternate-modifier (quote super))
 
-;(require 'redo)
+
+;; Reload .emacs [Alt]-[r]
+(global-set-key "\M-r"
+  '(lambda ()
+     (interactive)
+     (load-file "~/.emacs")))
+
+(require 'redo+)
 (require 'mac-key-mode)
 (mac-key-mode 1)
 
 (setq vc-follow-symlinks 1) ;; don't ask to follow a configuration simlink
+
+(require 'tabbar)
+(tabbar-mode) ;comment out this line to start without the tab on top
+(global-set-key (kbd "s-<up>") 'tabbar-backward-group)
+(global-set-key (kbd "s-<down>") 'tabbar-forward-group)
+(global-set-key (kbd "s-<left>") 'tabbar-backward)
+(global-set-key (kbd "s-<right>") 'tabbar-forward)
+
+(setq tabbar-buffer-groups-function  ;; all tabs is just one group
+  (lambda ()
+    (list "All")))
