@@ -164,7 +164,6 @@
 (add-hook 'python-mode-hook
   (lambda() (linum-mode 1)))
 
-
 ;; load these only if using window-system emacs
 (when (display-graphic-p)
   ;; disables scrollbar
@@ -193,11 +192,14 @@
 (setq vc-follow-symlinks 1) ;; don't ask to follow a configuration simlink
 
 (require 'tabbar)
-(tabbar-mode) ;comment out this line to start without the tab on top
+(tabbar-mode)
 (global-set-key (kbd "s-<up>") 'tabbar-backward-group)
 (global-set-key (kbd "s-<down>") 'tabbar-forward-group)
 (global-set-key (kbd "s-<left>") 'tabbar-backward)
 (global-set-key (kbd "s-<right>") 'tabbar-forward)
+
+(global-set-key "\M-," 'tabbar-backward)
+(global-set-key "\M-." 'tabbar-forward)
 
 (setq tabbar-buffer-groups-function  ;; all tabs is just one group
   (lambda ()
@@ -214,7 +216,6 @@
             ("<up>"    . ignore             )
             ("<down>"  . ignore             ))))
 (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
-
 
 (global-set-key [f2] 'visit-ansi-term)
 (require 'term)
