@@ -240,3 +240,10 @@
             (kill-buffer "*ansi-term*")
             (ansi-term term-cmd))
         (ansi-term term-cmd)))))
+
+(require 'ido)
+(ido-mode t)
+(setq ido-enable-flex-matching t)
+
+(require 'uniquify) ;; overrides Emacs’ default mechanism for making buffer names unique
+(setq uniquify-buffer-name-style 'forward)
