@@ -29,7 +29,6 @@
   scroll-margin 1
   scroll-step 1
   scroll-conservatively 10000
-  ;scroll-preserve-screen-position 1
 )
 
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
@@ -77,11 +76,6 @@
   (kill-buffer (current-buffer)))
 (global-set-key (kbd "C-x k") 'kill-current-buffer)
 
-;(require 'highlight-current-line)
-;(highlight-current-line-on t)
-;; To customize the background color of the line
-;(set-face-background 'highlight-current-line-face "#333333")
-
 (setq
   inhibit-startup-message t
   require-final-newline t
@@ -89,9 +83,12 @@
   mac-pass-command-to-system nil
   mac-option-key-is-meta nil
   mac-command-key-is-meta t
-  mac-command-modifier 'meta
   mac-option-modifier nil
 )
+
+(when (eq system-type 'darwin)
+    (setq ns-alternate-modifier 'none)
+    (setq mac-command-modifier 'meta))
 
 (setq-default truncate-lines t)  ;; disable line wrap
 (setq-default indent-tabs-mode nil)
@@ -169,11 +166,6 @@
   ;; disables scrollbar
   (scroll-bar-mode -1)
   (display-battery-mode 1))
-
-;(setq mac-option-key-is-meta nil)
-;(setq mac-command-key-is-meta t)
-;(setq mac-command-modifier 'meta)
-;(setq mac-option-modifier nil)
 
 ;; Command-Key and Option-Key
 (setq ns-command-modifier (quote meta))
