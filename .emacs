@@ -14,8 +14,6 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 
 (mouse-avoidance-mode 'animate)
-;(setq mouse-yank-at-point t)
-;(setq mouse-set-region t)
 
 (require 'mwheel)
 (mouse-wheel-mode 1)
@@ -155,7 +153,6 @@
 
 ;; C-F5 toggle line numbers
 (autoload 'linum-mode "linum" "toggle line numbers on/off" t)
-;(global-set-key (kbd "<f5>") 'linum-mode)
 (global-set-key (kbd "C-c n") 'linum-mode)
 (setq linum-format "%3d ")  ;; put a space after line number
 (add-hook 'python-mode-hook
