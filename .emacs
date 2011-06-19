@@ -237,3 +237,12 @@
 
 (require 'uniquify) ;; overrides Emacs’ default mechanism for making buffer names unique
 (setq uniquify-buffer-name-style 'forward)
+
+;; cd ~/.emacs.d/vendor
+;; curl http://cx4a.org/pub/auto-complete/auto-complete-1.3.1.tar.bz2 | tar jx
+;; cd auto-complete-1.3.1
+;; make byte-compile
+(add-to-list 'load-path "~/.emacs.d/vendor/auto-complete-1.3.1/")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/vendor/auto-complete-1.3.1/dict")
+(ac-config-default)
