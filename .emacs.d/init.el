@@ -250,9 +250,9 @@
 (setq python-check-command "pyflakes")
 
 ;; Zen coding expand C-j
-(add-to-list 'load-path "~/.emacs.d/vendor/zencoding/")
-(require 'zencoding-mode)
-(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
+;(add-to-list 'load-path "~/.emacs.d/vendor/zencoding/")
+;(require 'zencoding-mode)
+;(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
 
 ;(load "~/.emacs.d/vendor/nxhtml/autostart.el")
 
