@@ -246,3 +246,9 @@
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/vendor/auto-complete-1.3.1/dict")
 (ac-config-default)
+
+(setq python-check-command "pyflakes")
+
+(add-to-list 'load-path "~/.emacs.d/vendor/zencoding/")
+(require 'zencoding-mode)
+(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
