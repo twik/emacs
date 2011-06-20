@@ -1,3 +1,0 @@
-[submodule "vendor/zencoding"]
-        path = vendor/zencoding
-        url = git://github.com/rooney/zencoding.git
