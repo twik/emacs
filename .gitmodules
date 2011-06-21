@@ -1,0 +1,6 @@
+[submodule "vendor/zencoding"]
+	path = vendor/zencoding
+	url = git://github.com/rooney/zencoding.git
+[submodule "vendor/textmate.el"]
+	path = vendor/textmate.el
+	url = git://github.com/defunkt/textmate.el.git
