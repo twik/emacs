@@ -175,7 +175,7 @@
 (global-set-key "\M-r"
   '(lambda ()
      (interactive)
-     (load-file "~/.emacs")))
+     (load-file "~/.emacs.d/init.el")))
 
 (require 'redo+)
 
