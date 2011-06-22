@@ -86,7 +86,10 @@
 
 (when (eq system-type 'darwin)
     (setq ns-alternate-modifier 'none)
-    (setq mac-command-modifier 'meta))
+    (setq mac-command-modifier 'meta)
+    (require 'mac-key-mode)
+    (mac-key-mode 1)
+)
 
 (setq-default truncate-lines t)  ;; disable line wrap
 (setq-default indent-tabs-mode nil)
@@ -175,8 +178,6 @@
      (load-file "~/.emacs")))
 
 (require 'redo+)
-(require 'mac-key-mode)
-(mac-key-mode 1)
 
 (setq vc-follow-symlinks 1) ;; don't ask to follow a configuration simlink
 
