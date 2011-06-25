@@ -43,7 +43,6 @@
 (setq auto-save-list-file-name  nil) ; Don't want any .saves files
 (setq auto-save-default         nil) ; Don't want any auto saving
 
-(setq backup-directory-alist `(("." . "/tmp")))
 (setq search-highlight t) ; Highlight search object
 (defalias 'yes-or-no-p 'y-or-n-p)
 
