@@ -233,6 +233,7 @@
 
 (require 'ido)
 (ido-mode t)
+(ido-everywhere t)
 (setq ido-enable-flex-matching t)
 
 (require 'uniquify) ;; overrides Emacs’ default mechanism for making buffer names unique
