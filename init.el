@@ -97,9 +97,9 @@
 (column-number-mode t)
 (show-paren-mode t)
 
-(require 'mouse)
-(xterm-mouse-mode 1)
-(mwheel-install)
+(require 'mouse+)
+(xterm-mouse-mode  t)
+(defun track-mouse (e))
 
 (global-set-key (kbd "<Scroll_Lock>") 'scroll-lock-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
