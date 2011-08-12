@@ -6,12 +6,13 @@
 (add-to-list 'load-path "~/.emacs.d/color-theme/")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-goodies-el/")
 
+(require 'twik-bindings)
+
 (defadvice terminal-init-xterm (after select-shift-up activate)
   (define-key input-decode-map "\e[1;2A" [S-up]))  ;; fixes Shift-Up text selection
 
 (require 'flymake)
 (setq python-check-command "pyflakes")
-(global-set-key (kbd "RET") 'newline-and-indent)
 
 (mouse-avoidance-mode 'animate)
 
@@ -59,12 +60,6 @@
 (if auto-save-default
     (auto-save-mode -1))
 
-;; under OS X these lines will sync the kill ring with the clipboard
-(global-set-key (kbd "C-w") 'clipboard-kill-region)
-(global-set-key (kbd "M-w") 'clipboard-kill-ring-save)
-(global-set-key (kbd "C-y") 'clipboard-yank)
-(global-set-key (kbd "M-n") 'toggle-fullscreen)
-
 (column-number-mode t)
 
 (require 'bar-cursor)
@@ -73,7 +68,6 @@
 (defun kill-current-buffer ()
   (interactive)
   (kill-buffer (current-buffer)))
-(global-set-key (kbd "C-x k") 'kill-current-buffer)
 
 (setq
   inhibit-startup-message t
@@ -110,14 +104,16 @@
 (column-number-mode t)
 (show-paren-mode t)
 
-(require 'mouse)
-(xterm-mouse-mode 1)
-(mwheel-install)
+(require 'mouse+)
+(xterm-mouse-mode  t)
+(defun track-mouse (e))
+;(mouse-drag-region START-EVENT)
 
-(global-set-key (kbd "<Scroll_Lock>") 'scroll-lock-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(global-set-key "\C-l" 'goto-line) ; [Ctrl]-[L]
+(add-to-list 'load-path "~/.emacs.d/vendor/textmate.el")
+(require 'textmate)
+(textmate-mode)
 
 ;; --------------
 (defvar LIMIT 1)
@@ -143,7 +139,6 @@
      (setq rest (cdr rest)))
    (setq time (time-now)))
 
-(global-set-key [f4] 'bubble-buffer)
 ;; ----------------
 
 ;; Full screen
@@ -153,22 +148,19 @@
 'fullscreen)
                                            nil
                                            'fullboth)))
-(global-set-key [M-f11] 'toggle-fullscreen)
 
-;;-------- Toggle modeline,  Command-F12 on Mac
+;;-------- bottom modeline
 (defun toggle-mode-line () "toggles the modeline on and off"
   (interactive)
   (setq mode-line-format
     (if (equal mode-line-format nil)
         (default-value 'mode-line-format)) )
   (redraw-display))
-
-(global-set-key [M-f12] 'toggle-mode-line)
 ;;--------
 
-;; C-F5 toggle line numbers
+;; line numbers
 (autoload 'linum-mode "linum" "toggle line numbers on/off" t)
-(global-set-key (kbd "C-c n") 'linum-mode)
+
 (setq linum-format "%3d ")  ;; put a space after line number
 (add-hook 'python-mode-hook
   (lambda() (linum-mode 1)))
@@ -195,13 +187,6 @@
 
 (require 'tabbar)
 (tabbar-mode)
-(global-set-key (kbd "s-<up>") 'tabbar-backward-group)
-(global-set-key (kbd "s-<down>") 'tabbar-forward-group)
-(global-set-key (kbd "s-<left>") 'tabbar-backward)
-(global-set-key (kbd "s-<right>") 'tabbar-forward)
-
-(global-set-key "\M-," 'tabbar-backward)
-(global-set-key "\M-." 'tabbar-forward)
 
 (setq tabbar-buffer-groups-function  ;; all tabs is just one group
   (lambda ()
@@ -268,8 +253,6 @@
 (require 'zencoding-mode)
 (add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
 
-;(load "~/.emacs.d/vendor/nxhtml/autostart.el")
-
 
 (defun copy-line (arg)
   "Copy lines (as many as prefix argument) in the kill ring"
@@ -278,7 +261,6 @@
                   (line-beginning-position (+ 1 arg)))
   (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
 ;; optional key binding
-(global-set-key "\C-c\C-k" 'copy-line)
 
 
 ;; duplicate current line
@@ -297,4 +279,45 @@
 	(insert current-line)
 	(decf n)))))
 
-(global-set-key (kbd "C-S-d") 'duplicate-current-line)
+
+;; Paste at point NOT at cursor
+(setq mouse-yank-at-point 't)
+
+;; Make control+pageup/down scroll the other buffer
+(global-set-key [C-next] 'scroll-other-window)
+(global-set-key [C-prior] 'scroll-other-window-down)
+
+(mac-key-mode 1)
+(setq mac-option-modifier 'meta)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq *true-mac-cut-buffer* "")
+(setq *true-mac-cut-buffer2* t)
+
+(setq interprogram-cut-function
+            '(lambda (str push)
+                        (setq *true-mac-cut-buffer* str)
+                                 (setq *true-mac-cut-buffer2* push)))
+
+(setq interprogram-paste-function
+            '(lambda () nil))
+
+(defun true-mac-cut-function () (interactive)
+    (if mark-active
+              (progn
+                        (true-mac-copy-function)
+                                (kill-region (point) (mark)))
+          (beep)))
+
+(defun true-mac-copy-function () (interactive)
+    (if mark-active
+              (mac-cut-function
+                      *true-mac-cut-buffer*
+                             *true-mac-cut-buffer2*)
+          (beep)))
+
+(defun true-mac-paste-function () (interactive)
+    (if mark-active
+              (kill-region (point) (mark)))
+      (insert (mac-paste-function)))
+
