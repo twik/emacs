@@ -1,7 +1,7 @@
 ;; under OS X these lines will sync the kill ring with the clipboard
-(global-set-key (kbd "C-w") 'clipboard-kill-region)
-(global-set-key (kbd "M-w") 'clipboard-kill-ring-save)
-(global-set-key (kbd "C-y") 'clipboard-yank)
+(global-set-key "\C-w" 'clipboard-kill-region)
+(global-set-key "\M-w" 'clipboard-kill-ring-save)
+(global-set-key "\C-y" 'clipboard-yank)
 
 ;; Fullscreen mode
 (global-set-key (kbd "M-n") 'toggle-fullscreen)
@@ -53,9 +53,5 @@
 (global-set-key [?\A-n] 'new-frame)
 
 (setq x-select-enable-clipboard t)
-
-;(global-set-key "\C-w" 'clipboard-kill-region)
-;(global-set-key "\M-w" 'clipboard-kill-ring-save)
-;(global-set-key "\C-y" 'clipboard-yank)
 
 (provide 'twik-bindings)
