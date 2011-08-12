@@ -287,9 +287,6 @@
 (global-set-key [C-next] 'scroll-other-window)
 (global-set-key [C-prior] 'scroll-other-window-down)
 
-(mac-key-mode 1)
-(setq mac-option-modifier 'meta)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq *true-mac-cut-buffer* "")
 (setq *true-mac-cut-buffer2* t)
