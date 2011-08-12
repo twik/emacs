@@ -6,12 +6,13 @@
 (add-to-list 'load-path "~/.emacs.d/color-theme/")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-goodies-el/")
 
+(require 'twik-bindings)
+
 (defadvice terminal-init-xterm (after select-shift-up activate)
   (define-key input-decode-map "\e[1;2A" [S-up]))  ;; fixes Shift-Up text selection
 
 (require 'flymake)
 (setq python-check-command "pyflakes")
-(global-set-key (kbd "RET") 'newline-and-indent)
 
 (mouse-avoidance-mode 'animate)
 
@@ -57,12 +58,6 @@
 (if auto-save-default
     (auto-save-mode -1))
 
-;; under OS X these lines will sync the kill ring with the clipboard
-(global-set-key (kbd "C-w") 'clipboard-kill-region)
-(global-set-key (kbd "M-w") 'clipboard-kill-ring-save)
-(global-set-key (kbd "C-y") 'clipboard-yank)
-(global-set-key (kbd "M-n") 'toggle-fullscreen)
-
 (column-number-mode t)
 
 (require 'bar-cursor)
@@ -71,7 +66,6 @@
 (defun kill-current-buffer ()
   (interactive)
   (kill-buffer (current-buffer)))
-(global-set-key (kbd "C-x k") 'kill-current-buffer)
 
 (setq
   inhibit-startup-message t
@@ -102,11 +96,7 @@
 (defun track-mouse (e))
 ;(mouse-drag-region START-EVENT)
 
-
-(global-set-key (kbd "<Scroll_Lock>") 'scroll-lock-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-(global-set-key "\C-l" 'goto-line) ; [Ctrl]-[L]
 
 (add-to-list 'load-path "~/.emacs.d/vendor/textmate.el")
 (require 'textmate)
@@ -136,7 +126,6 @@
      (setq rest (cdr rest)))
    (setq time (time-now)))
 
-(global-set-key [f4] 'bubble-buffer)
 ;; ----------------
 
 ;; Full screen
@@ -146,22 +135,19 @@
 'fullscreen)
                                            nil
                                            'fullboth)))
-(global-set-key [M-f11] 'toggle-fullscreen)
 
-;;-------- Toggle modeline,  Command-F12 on Mac
+;;-------- bottom modeline
 (defun toggle-mode-line () "toggles the modeline on and off"
   (interactive)
   (setq mode-line-format
     (if (equal mode-line-format nil)
         (default-value 'mode-line-format)) )
   (redraw-display))
-
-(global-set-key [M-f12] 'toggle-mode-line)
 ;;--------
 
-;; C-F5 toggle line numbers
+;; line numbers
 (autoload 'linum-mode "linum" "toggle line numbers on/off" t)
-(global-set-key (kbd "C-c n") 'linum-mode)
+
 (setq linum-format "%3d ")  ;; put a space after line number
 (add-hook 'python-mode-hook
   (lambda() (linum-mode 1)))
@@ -188,13 +174,6 @@
 
 (require 'tabbar)
 (tabbar-mode)
-(global-set-key (kbd "s-<up>") 'tabbar-backward-group)
-(global-set-key (kbd "s-<down>") 'tabbar-forward-group)
-(global-set-key (kbd "s-<left>") 'tabbar-backward)
-(global-set-key (kbd "s-<right>") 'tabbar-forward)
-
-(global-set-key "\M-," 'tabbar-backward)
-(global-set-key "\M-." 'tabbar-forward)
 
 (setq tabbar-buffer-groups-function  ;; all tabs is just one group
   (lambda ()
@@ -269,7 +248,6 @@
                   (line-beginning-position (+ 1 arg)))
   (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
 ;; optional key binding
-(global-set-key "\C-c\C-k" 'copy-line)
 
 
 ;; duplicate current line
@@ -288,7 +266,6 @@
 	(insert current-line)
 	(decf n)))))
 
-(global-set-key (kbd "C-S-d") 'duplicate-current-line)
 
 ;; Paste at point NOT at cursor
 (setq mouse-yank-at-point 't)
@@ -330,30 +307,4 @@
     (if mark-active
               (kill-region (point) (mark)))
       (insert (mac-paste-function)))
-
-(global-set-key [?\A-x] 'true-mac-cut-function)
-(global-set-key [?\A-c] 'true-mac-copy-function)
-(global-set-key [?\A-v] 'true-mac-paste-function)
-
-;; Other commands to make you feel at home
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-set-key [?\A-a] 'mark-whole-buffer)
-(global-set-key [?\A-s] 'save-buffer)
-(global-set-key [?\A-S] 'write-file)
-(global-set-key [?\A-p] 'ps-print-buffer)
-(global-set-key [?\A-o] 'find-file)
-(global-set-key [?\A-q] 'save-buffers-kill-emacs)
-(global-set-key [?\A-w] 'kill-buffer-and-window)
-(global-set-key [?\A-z] 'undo)
-(global-set-key [?\A-f] 'isearch-forward)
-(global-set-key [?\A-g] 'query-replace)
-(global-set-key [?\A-l] 'goto-line)
-(global-set-key [?\A-m] 'iconify-frame)
-(global-set-key [?\A-n] 'new-frame)
-
-(setq x-select-enable-clipboard t)
-
-(global-set-key "\C-w" 'clipboard-kill-region)
-(global-set-key "\M-w" 'clipboard-kill-ring-save)
-(global-set-key "\C-y" 'clipboard-yank)
 
