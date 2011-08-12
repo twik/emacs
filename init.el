@@ -44,6 +44,8 @@
 (setq auto-save-list-file-name  nil) ; Don't want any .saves files
 (setq auto-save-default         nil) ; Don't want any auto saving
 
+(auto-compression-mode t) ; Transparently open compressed files
+
 (setq search-highlight t) ; Highlight search object
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -77,6 +79,16 @@
   mac-option-modifier nil
 )
 
+
+;; Use F10 to invoke ibuffer
+(setq ibuffer-shrink-to-minimum-size t)
+(setq ibuffer-always-show-last-buffer nil)
+(setq ibuffer-sorting-mode 'recency)
+(setq ibuffer-use-header-line t)
+
+(global-set-key [(f10)] 'ibuffer)
+
+
 (when (eq system-type 'darwin)
     (setq ns-alternate-modifier 'none)
     (setq mac-command-modifier 'meta)
@@ -84,6 +96,7 @@
     (mac-key-mode 1)
 )
 
+(setq x-select-enable-clipboard t)
 (setq-default truncate-lines t)  ;; disable line wrap
 (setq-default indent-tabs-mode nil)
 (setq default-tab-width 4)
