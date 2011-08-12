@@ -100,6 +100,8 @@
 (require 'mouse+)
 (xterm-mouse-mode  t)
 (defun track-mouse (e))
+;(mouse-drag-region START-EVENT)
+
 
 (global-set-key (kbd "<Scroll_Lock>") 'scroll-lock-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -259,8 +261,6 @@
 (require 'zencoding-mode)
 (add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
 
-;(load "~/.emacs.d/vendor/nxhtml/autostart.el")
-
 
 (defun copy-line (arg)
   "Copy lines (as many as prefix argument) in the kill ring"
@@ -289,3 +289,71 @@
 	(decf n)))))
 
 (global-set-key (kbd "C-S-d") 'duplicate-current-line)
+
+;; Paste at point NOT at cursor
+(setq mouse-yank-at-point 't)
+
+;; Make control+pageup/down scroll the other buffer
+(global-set-key [C-next] 'scroll-other-window)
+(global-set-key [C-prior] 'scroll-other-window-down)
+
+(mac-key-mode 1)
+(setq mac-option-modifier 'meta)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq *true-mac-cut-buffer* "")
+(setq *true-mac-cut-buffer2* t)
+
+(setq interprogram-cut-function
+            '(lambda (str push)
+                        (setq *true-mac-cut-buffer* str)
+                                 (setq *true-mac-cut-buffer2* push)))
+
+(setq interprogram-paste-function
+            '(lambda () nil))
+
+(defun true-mac-cut-function () (interactive)
+    (if mark-active
+              (progn
+                        (true-mac-copy-function)
+                                (kill-region (point) (mark)))
+          (beep)))
+
+(defun true-mac-copy-function () (interactive)
+    (if mark-active
+              (mac-cut-function
+                      *true-mac-cut-buffer*
+                             *true-mac-cut-buffer2*)
+          (beep)))
+
+(defun true-mac-paste-function () (interactive)
+    (if mark-active
+              (kill-region (point) (mark)))
+      (insert (mac-paste-function)))
+
+(global-set-key [?\A-x] 'true-mac-cut-function)
+(global-set-key [?\A-c] 'true-mac-copy-function)
+(global-set-key [?\A-v] 'true-mac-paste-function)
+
+;; Other commands to make you feel at home
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key [?\A-a] 'mark-whole-buffer)
+(global-set-key [?\A-s] 'save-buffer)
+(global-set-key [?\A-S] 'write-file)
+(global-set-key [?\A-p] 'ps-print-buffer)
+(global-set-key [?\A-o] 'find-file)
+(global-set-key [?\A-q] 'save-buffers-kill-emacs)
+(global-set-key [?\A-w] 'kill-buffer-and-window)
+(global-set-key [?\A-z] 'undo)
+(global-set-key [?\A-f] 'isearch-forward)
+(global-set-key [?\A-g] 'query-replace)
+(global-set-key [?\A-l] 'goto-line)
+(global-set-key [?\A-m] 'iconify-frame)
+(global-set-key [?\A-n] 'new-frame)
+
+(setq x-select-enable-clipboard t)
+
+(global-set-key "\C-w" 'clipboard-kill-region)
+(global-set-key "\M-w" 'clipboard-kill-ring-save)
+(global-set-key "\C-y" 'clipboard-yank)
+
