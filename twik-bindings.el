@@ -51,6 +51,7 @@
 (global-set-key [?\A-l] 'goto-line)
 (global-set-key [?\A-m] 'iconify-frame)
 (global-set-key [?\A-n] 'new-frame)
+(global-set-key [?\A-d] 'duplicate-current-line)
 
 (setq x-select-enable-clipboard t)
 
