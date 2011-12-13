@@ -104,9 +104,9 @@
 (column-number-mode t)
 (show-paren-mode t)
 
-(require 'mouse+)
+;(require 'mouse+)
 (xterm-mouse-mode  t)
-(defun track-mouse (e))
+;(defun track-mouse (e))
 ;(mouse-drag-region START-EVENT)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
