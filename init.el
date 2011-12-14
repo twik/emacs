@@ -107,7 +107,7 @@
 ;(require 'mouse-sel)
 (require 'mouse)
 (xterm-mouse-mode  t)
-;(defun track-mouse (e))
+(defun track-mouse (e))
 (setq mouse-sel-mode t)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
