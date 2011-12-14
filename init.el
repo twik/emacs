@@ -34,7 +34,6 @@
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil))) ;; one line at a time
-(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 
 (setq show-trailing-whitespace t)
 (setq-default show-trailing-whitespace t)
@@ -104,10 +103,12 @@
 (column-number-mode t)
 (show-paren-mode t)
 
-;(require 'mouse+)
+
+(require 'mouse-sel)
+;(require 'mouse)
 (xterm-mouse-mode  t)
-;(defun track-mouse (e))
-;(mouse-drag-region START-EVENT)
+(defun track-mouse (e))
+(setq mouse-sel-mode t)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
