@@ -24,6 +24,10 @@
 (delete-selection-mode 1)
 (menu-bar-mode -1) ;; hide top menu bar
 
+(line-number-mode t)                     ;; show line numbers
+(column-number-mode t)                   ;; show column numbers
+(size-indication-mode t)                 ;; show file size (emacs 22+)
+
 (setq redisplay-dont-pause t  ;; http://stackoverflow.com/questions/3631220/fix-to-get-smooth-scrolling-in-emacs
   scroll-margin 1
   scroll-step 1
@@ -73,9 +77,7 @@
   require-final-newline t
   ring-bell-function 'ignore
   mac-pass-command-to-system nil
- ; mac-option-key-is-meta nil
   mac-command-key-is-meta t
-  ;mac-option-modifier nil
 )
 
 
@@ -104,7 +106,6 @@
 (show-paren-mode t)
 
 
-;(require 'mouse-sel)
 (require 'mouse)
 (xterm-mouse-mode  t)
 (defun track-mouse (e))
