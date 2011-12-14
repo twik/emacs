@@ -73,9 +73,9 @@
   require-final-newline t
   ring-bell-function 'ignore
   mac-pass-command-to-system nil
-  mac-option-key-is-meta nil
+ ; mac-option-key-is-meta nil
   mac-command-key-is-meta t
-  mac-option-modifier nil
+  ;mac-option-modifier nil
 )
 
 
@@ -104,10 +104,10 @@
 (show-paren-mode t)
 
 
-(require 'mouse-sel)
-;(require 'mouse)
+;(require 'mouse-sel)
+(require 'mouse)
 (xterm-mouse-mode  t)
-(defun track-mouse (e))
+;(defun track-mouse (e))
 (setq mouse-sel-mode t)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -173,8 +173,8 @@
   (display-battery-mode 1))
 
 ;; Command-Key and Option-Key
-(setq ns-command-modifier (quote meta))
-(setq ns-alternate-modifier (quote super))
+;(setq ns-command-modifier (quote meta))
+;(setq ns-alternate-modifier (quote super))
 
 ;; Reload .emacs [Alt]-[r]
 (global-set-key "\M-r"
