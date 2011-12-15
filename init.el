@@ -290,6 +290,13 @@
 (global-set-key [C-next] 'scroll-other-window)
 (global-set-key [C-prior] 'scroll-other-window-down)
 
+
+;; Resize buffers with the hotkeys
+(global-set-key (kbd "<f5>") 'shrink-window-horizontally)
+(global-set-key (kbd "<f6>") 'enlarge-window-horizontally)
+(global-set-key (kbd "<f7>") 'shrink-window)
+(global-set-key (kbd "<f8>") 'enlarge-window)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq *true-mac-cut-buffer* "")
 (setq *true-mac-cut-buffer2* t)
