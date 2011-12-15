@@ -349,3 +349,10 @@
   (lambda ()
     ;; Default indentation is usually 2 spaces, changing to 4.
     (set (make-local-variable 'sgml-basic-offset) 4)))
+
+
+;; Why it doesn't work in the terminal???
+(global-set-key (kbd "C-=") 'switch-to-previous-buffer)
+  (defun switch-to-previous-buffer ()
+    (interactive)
+    (switch-to-buffer (other-buffer)))
