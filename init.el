@@ -70,8 +70,6 @@
 (if auto-save-default
     (auto-save-mode -1))
 
-(column-number-mode t)
-
 (require 'bar-cursor)
 (bar-cursor-mode 1)
 
