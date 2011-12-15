@@ -62,12 +62,10 @@
 (color-theme-railscasts)
 
 ; Set font
-(set-default-font "-apple-Consolas-normal-normal-normal-*-16-200-72-72-m-0-iso10646-1")
+(set-default-font "-apple-Consolas-normal-normal-normal-*-17-200-72-72-m-0-iso10646-1")
 
 (when (display-graphic-p)
     (setq-default line-spacing 0.15)) ; add some height between lines
-
-
 
 
 (if auto-save-default
@@ -96,6 +94,17 @@
 (setq ibuffer-always-show-last-buffer nil)
 (setq ibuffer-sorting-mode 'recency)
 (setq ibuffer-use-header-line t)
+
+;; ignore certain buffers
+(add-to-list 'iswitchb-buffer-ignore "^ ")
+(add-to-list 'iswitchb-buffer-ignore "*Messages*")
+(add-to-list 'iswitchb-buffer-ignore "*ECB")
+(add-to-list 'iswitchb-buffer-ignore "*Buffer")
+(add-to-list 'iswitchb-buffer-ignore "*Completions")
+(add-to-list 'iswitchb-buffer-ignore "*ftp ")
+(add-to-list 'iswitchb-buffer-ignore "*bsh")
+(add-to-list 'iswitchb-buffer-ignore "*jde-log")
+(add-to-list 'iswitchb-buffer-ignore "^[tT][aA][gG][sS]$")
 
 (global-set-key [(f10)] 'ibuffer)
 
