@@ -63,6 +63,7 @@
 
 ; Set font
 (set-default-font "-apple-Consolas-normal-normal-normal-*-16-200-72-72-m-0-iso10646-1")
+(setq-default line-spacing 0.2) ; add 0.2 height between lines
 
 (if auto-save-default
     (auto-save-mode -1))
