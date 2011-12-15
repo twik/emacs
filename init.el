@@ -116,6 +116,8 @@
 ;;(set-face-foreground 'show-paren-match-face "#def")
 ;;(set-face-attribute 'show-paren-match-face nil :weight 'extra-bold)
 
+;; don't sleep emacs accidentally
+(global-set-key [(control z)] nil)
 
 (require 'mouse)
 (xterm-mouse-mode  t)
