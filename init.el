@@ -11,6 +11,10 @@
 (defadvice terminal-init-xterm (after select-shift-up activate)
   (define-key input-decode-map "\e[1;2A" [S-up]))  ;; fixes Shift-Up text selection
 
+;; fringes to show the beginning and end of a buffer and empty lines
+(setq-default indicate-empty-lines t)
+(setq-default indicate-buffer-boundaries 'left)
+
 (require 'flymake)
 (setq python-check-command "pyflakes")
 
