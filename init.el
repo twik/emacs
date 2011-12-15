@@ -122,6 +122,8 @@
 ;; TODO: why it doesn't work??
 (transient-mark-mode t)
 
+(global-set-key "\C-x\C-j" 'join-line)
+
 (require 'mouse)
 (xterm-mouse-mode  t)
 (defun track-mouse (e))
