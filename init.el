@@ -109,6 +109,7 @@
 
 (show-paren-mode t)
 (setq show-paren-style 'parentheses)
+(setq show-paren-delay 0)
 ;; TODO: set paren color
 ;;(require 'paren)
 ;;(set-face-background 'show-paren-match-face (face-background 'default))
