@@ -119,6 +119,9 @@
 ;; don't sleep emacs accidentally
 (global-set-key [(control z)] nil)
 
+;; TODO: why it doesn't work??
+(transient-mark-mode t)
+
 (require 'mouse)
 (xterm-mouse-mode  t)
 (defun track-mouse (e))
