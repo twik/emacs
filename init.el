@@ -227,11 +227,9 @@
         (ansi-term term-cmd)))))
 
 (require 'ido)
-(ido-mode t)
-(ido-everywhere t)
-(setq ido-enable-flex-matching t)
-(setq ido-save-directory-list-file "~/.emacs.d/cache/ido.last")
 (setq
+  ido-enable-flex-matching t
+  ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
   ido-ignore-buffers ;; ignore these guys
     '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
       "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
@@ -244,6 +242,8 @@
   ido-max-prospects 8              ; don't spam my minibuffer
   ido-confirm-unique-completion t ; wait for RET, even with unique completion
 )
+(ido-mode t)
+(ido-everywhere t)
 
 (require 'uniquify) ;; overrides Emacs’ default mechanism for making buffer names unique
 (setq uniquify-buffer-name-style 'forward)
