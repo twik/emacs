@@ -67,7 +67,6 @@
 (when (display-graphic-p)
     (setq-default line-spacing 0.15)) ; add some height between lines
 
-
 (if auto-save-default
     (auto-save-mode -1))
 
@@ -95,23 +94,12 @@
 (setq ibuffer-sorting-mode 'recency)
 (setq ibuffer-use-header-line t)
 
-;; ignore certain buffers
-(add-to-list 'iswitchb-buffer-ignore "^ ")
-(add-to-list 'iswitchb-buffer-ignore "*Messages*")
-(add-to-list 'iswitchb-buffer-ignore "*ECB")
-(add-to-list 'iswitchb-buffer-ignore "*Buffer")
-(add-to-list 'iswitchb-buffer-ignore "*Completions")
-(add-to-list 'iswitchb-buffer-ignore "*ftp ")
-(add-to-list 'iswitchb-buffer-ignore "*bsh")
-(add-to-list 'iswitchb-buffer-ignore "*jde-log")
-(add-to-list 'iswitchb-buffer-ignore "^[tT][aA][gG][sS]$")
-
 (global-set-key [(f10)] 'ibuffer)
 
 
 (when (eq system-type 'darwin)
-    (setq ns-alternate-modifier 'none)
-    (setq mac-command-modifier 'meta)
+    (setq ns-alternate-modifier 'meta)
+    (setq mac-command-modifier 'none)
     (require 'mac-key-mode)
     (mac-key-mode 1)
 )
