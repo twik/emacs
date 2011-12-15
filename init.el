@@ -106,7 +106,14 @@
 (setq default-tab-width 4)
 (global-auto-revert-mode 1)
 (column-number-mode t)
+
 (show-paren-mode t)
+(setq show-paren-style 'parentheses)
+;; TODO: set paren color
+;;(require 'paren)
+;;(set-face-background 'show-paren-match-face (face-background 'default))
+;;(set-face-foreground 'show-paren-match-face "#def")
+;;(set-face-attribute 'show-paren-match-face nil :weight 'extra-bold)
 
 
 (require 'mouse)
