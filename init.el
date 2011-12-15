@@ -356,3 +356,10 @@
   (defun switch-to-previous-buffer ()
     (interactive)
     (switch-to-buffer (other-buffer)))
+
+
+;; linum mode
+(require 'linum)
+(global-linum-mode 1)
+(add-hook 'linum-before-numbering-hook
+  (lambda () (setq linum-format "%d ")))
