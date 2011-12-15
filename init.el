@@ -174,10 +174,6 @@
   (scroll-bar-mode -1)
   (display-battery-mode 1))
 
-;; Command-Key and Option-Key
-;(setq ns-command-modifier (quote meta))
-;(setq ns-alternate-modifier (quote super))
-
 ;; Reload .emacs [Alt]-[r]
 (global-set-key "\M-r"
   '(lambda ()
