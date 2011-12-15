@@ -83,8 +83,6 @@
   inhibit-startup-message t
   require-final-newline t
   ring-bell-function 'ignore
-  mac-pass-command-to-system nil
-  mac-command-key-is-meta t
 )
 
 
@@ -238,6 +236,20 @@
 (ido-mode t)
 (ido-everywhere t)
 (setq ido-enable-flex-matching t)
+(setq ido-save-directory-list-file "~/.emacs.d/cache/ido.last")
+(setq
+  ido-ignore-buffers ;; ignore these guys
+    '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
+      "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
+  ido-case-fold  t                 ; be case-insensitive
+  ido-enable-last-directory-history t ; remember last used dirs
+  ido-max-work-directory-list 30   ; should be enough
+  ido-max-work-file-list      50   ; remember many
+  ido-use-filename-at-point nil    ; don't use filename at point (annoying)
+  ido-use-url-at-point nil         ; don't use url at point (annoying)
+  ido-max-prospects 8              ; don't spam my minibuffer
+  ido-confirm-unique-completion t ; wait for RET, even with unique completion
+)
 
 (require 'uniquify) ;; overrides Emacs’ default mechanism for making buffer names unique
 (setq uniquify-buffer-name-style 'forward)
