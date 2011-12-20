@@ -203,6 +203,13 @@
 (require 'tabbar)
 (tabbar-mode)
 
+(when (display-graphic-p)
+  (setq EmacsPortable-global-tabbar 't) ; If you want tabbar
+ ; (setq EmacsPortable-global-ruler 't) ; if you want a global ruler
+ ; (setq EmacsPortable-popup-menu 't) ; If you want a popup menu.
+ ; (setq EmacsPortable-popup-toolbar 't) ; If you want a popup toolbar
+  (require 'tabbar-ruler))
+
 (setq tabbar-buffer-groups-function  ;; all tabs is just one group
   (lambda ()
     (list "All")))
