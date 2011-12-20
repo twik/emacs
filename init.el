@@ -118,7 +118,7 @@
 (global-set-key [(control z)] nil)
 
 ;; make delete key work properly
-(global-set-key [(control h)] 'delete-backward-char)
+(normal-erase-is-backspace-mode 1)
 
 ;; TODO: why it doesn't work??
 (transient-mark-mode t)
