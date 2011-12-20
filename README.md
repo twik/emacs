@@ -6,5 +6,5 @@ Installation:
     cd ~/.emacs.d/vendor/auto-complete-1.3.1
     make byte-compile
     cd ~/.emacs.d
-    git submodule init
-    git submodule update
+    git submodule sync
+    git submodule update --init --recursive
