@@ -119,6 +119,9 @@
 ;; don't sleep emacs accidentally
 (global-set-key [(control z)] nil)
 
+;; make delete key work properly
+(global-set-key [(control h)] 'delete-backward-char)
+
 ;; TODO: why it doesn't work??
 (transient-mark-mode t)
 
