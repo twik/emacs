@@ -38,7 +38,6 @@
   scroll-conservatively 10000
 )
 
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil))) ;; one line at a time
@@ -82,7 +81,6 @@
   require-final-newline t
   ring-bell-function 'ignore
 )
-
 
 ;; Use F10 to invoke ibuffer
 (setq ibuffer-shrink-to-minimum-size t)
@@ -288,7 +286,6 @@
 (add-to-list 'load-path "~/.emacs.d/vendor/zencoding/")
 (require 'zencoding-mode)
 (add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
-
 
 (defun copy-line (arg)
   "Copy lines (as many as prefix argument) in the kill ring"
