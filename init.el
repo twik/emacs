@@ -387,32 +387,11 @@
 (setq *true-mac-cut-buffer* "")
 (setq *true-mac-cut-buffer2* t)
 
-(setq interprogram-cut-function
-            '(lambda (str push)
-                        (setq *true-mac-cut-buffer* str)
-                                 (setq *true-mac-cut-buffer2* push)))
 
-(setq interprogram-paste-function
-            '(lambda () nil))
 
-(defun true-mac-cut-function () (interactive)
-    (if mark-active
-              (progn
-                        (true-mac-copy-function)
-                                (kill-region (point) (mark)))
-          (beep)))
-
-(defun true-mac-copy-function () (interactive)
-    (if mark-active
-              (mac-cut-function
-                      *true-mac-cut-buffer*
-                             *true-mac-cut-buffer2*)
-          (beep)))
-
-(defun true-mac-paste-function () (interactive)
-    (if mark-active
-              (kill-region (point) (mark)))
-      (insert (mac-paste-function)))
+  ;; integrate copy/paste with X
+  (setq x-select-enable-clipboard t)
+  (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
 ;; ---
 (add-hook 'html-mode-hook
