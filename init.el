@@ -268,7 +268,7 @@
   (lambda ()
     (list "All")))
 
-(icomlete-mode 1)
+(icomplete-mode 1)
 
 ;; enable iswitchb mode 'C-x b' and allow using arrow keys
 (iswitchb-mode 1)
