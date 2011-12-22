@@ -141,6 +141,51 @@
 (when (boundp 'subword-mode)
   (add-hook 'after-change-major-mode-hook '(lambda () (subword-mode 1))))
 
+    ; Bindings
+    (defun delete-backward-indent (&optional arg)
+      "Erase a level of indentation, or 1 character"
+      (interactive "*P")
+      (if (= (current-column) 0)
+          (delete-backward-char 1)
+        (let ((n (mod (current-column) standard-indent)))
+          (if (looking-back (concat "^\s*" (make-string n 32)))
+              (if (= n 0)
+                  (delete-backward-char standard-indent)
+                (delete-backward-char n))
+            (delete-backward-char 1)))))
+
+    (defun newline-maybe-indent ()
+      "Like newline-and-indent, but doesn't indent if the previous line is blank"
+      (interactive "*")
+      (if (= (line-beginning-position) (line-end-position))
+          (newline)
+        (newline-and-indent)))
+
+    (add-hook 'python-mode-hook
+              '(lambda ()
+                 (hs-minor-mode 1) ; code folding
+                 (define-key python-mode-map (kbd "RET") 'newline-maybe-indent)
+                 (define-key python-mode-map (kbd "DEL") 'delete-backward-indent)
+                 (define-key python-mode-map (kbd "M-RET") 'hs-toggle-hiding)))
+
+    ; On-the-fly spell checking
+    (add-hook 'python-mode-hook '(lambda () (flyspell-prog-mode)))
+
+    ; On-the-fly pyflakes checking
+    (require 'flymake-point) ; shows errors in the minibuffer when highlighted (http://bitbucket.org/brodie/dotfiles/src/tip/.emacs.d/plugins/flymake-point.el)
+    (setq python-check-command "pyflakes")
+    (when (load "flymake" t)
+      (defun flymake-pyflakes-init ()
+        (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                           'flymake-create-temp-inplace))
+               (local-file (file-relative-name
+                            temp-file
+                            (file-name-directory buffer-file-name))))
+          (list "pyflakes" (list local-file))))
+      (add-to-list 'flymake-allowed-file-name-masks
+                   '("\\.py\\'" flymake-pyflakes-init)))
+    (add-hook 'python-mode-hook '(lambda () (flymake-mode 1)))
+
 ;; --------------
 (defvar LIMIT 1)
 (defvar time 0)
