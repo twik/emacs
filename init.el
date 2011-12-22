@@ -134,7 +134,12 @@
 (defun track-mouse (e))
 (setq mouse-sel-mode t)
 
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; camel case word navigation
+(when (boundp 'subword-mode)
+  (add-hook 'after-change-major-mode-hook '(lambda () (subword-mode 1))))
 
 ;; --------------
 (defvar LIMIT 1)
