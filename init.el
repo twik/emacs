@@ -414,3 +414,10 @@
 (global-linum-mode 1)
 (add-hook 'linum-before-numbering-hook
   (lambda () (setq linum-format "%d ")))
+
+
+    ;; recent files
+    (require 'recentf)
+    (recentf-mode 1)
+    (setq recentf-max-menu-items 25)
+    (global-set-key "\C-x\ \C-r" 'recentf-open-files)
