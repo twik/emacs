@@ -69,6 +69,9 @@
 (if auto-save-default
     (auto-save-mode -1))
 
+;; syntax highlight everywhere
+(global-font-lock-mode t)
+
 (require 'bar-cursor)
 (bar-cursor-mode 1)
 
@@ -121,7 +124,7 @@
 (when (display-graphic-p)
  (normal-erase-is backspace-mode 1))
 
-;; TODO: why it doesn't work??
+;; Highlight selection
 (transient-mark-mode t)
 
 (global-set-key "\C-x\C-j" 'join-line)
@@ -212,6 +215,8 @@
 (setq tabbar-buffer-groups-function  ;; all tabs is just one group
   (lambda ()
     (list "All")))
+
+(icomlete-mode 1)
 
 ;; enable iswitchb mode 'C-x b' and allow using arrow keys
 (iswitchb-mode 1)
