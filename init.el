@@ -2,6 +2,7 @@
 
 ;add rope and ropemacs
 (add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/plugins/")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 (add-to-list 'load-path "~/.emacs.d/color-theme/")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-goodies-el/")
@@ -122,7 +123,7 @@
 
 ;; make delete key work properly
 (when (display-graphic-p)
- (normal-erase-is backspace-mode 1))
+ (normal-erase-is-backspace-mode 1))
 
 ;; Highlight selection
 (transient-mark-mode t)
@@ -133,7 +134,6 @@
 (xterm-mouse-mode  t)
 (defun track-mouse (e))
 (setq mouse-sel-mode t)
-
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -172,7 +172,9 @@
     (add-hook 'python-mode-hook '(lambda () (flyspell-prog-mode)))
 
     ; On-the-fly pyflakes checking
-    (require 'flymake-point) ; shows errors in the minibuffer when highlighted (http://bitbucket.org/brodie/dotfiles/src/tip/.emacs.d/plugins/flymake-point.el)
+    (require 'flymake-point)
+    ; shows errors in the minibuffer when highlighted
+    ; (http://bitbucket.org/brodie/dotfiles/src/tip/.emacs.d/plugins/flymake-point.el)
     (setq python-check-command "pyflakes")
     (when (load "flymake" t)
       (defun flymake-pyflakes-init ()
