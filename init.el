@@ -98,8 +98,7 @@
 (when (eq system-type 'darwin)
     (setq ns-alternate-modifier 'meta)
     (setq mac-command-modifier 'none)
-    (require 'mac-key-mode)
-    (mac-key-mode 1)
+    (require 'mac-key-mode    (mac-key-mode 1)
 )
 
 (setq x-select-enable-clipboard t)
@@ -167,26 +166,6 @@
                  (define-key python-mode-map (kbd "RET") 'newline-maybe-indent)
                  (define-key python-mode-map (kbd "DEL") 'delete-backward-indent)
                  (define-key python-mode-map (kbd "M-RET") 'hs-toggle-hiding)))
-
-    ; On-the-fly spell checking
-    (add-hook 'python-mode-hook '(lambda () (flyspell-prog-mode)))
-
-    ; On-the-fly pyflakes checking
-    (require 'flymake-point)
-    ; shows errors in the minibuffer when highlighted
-    ; (http://bitbucket.org/brodie/dotfiles/src/tip/.emacs.d/plugins/flymake-point.el)
-    (setq python-check-command "pyflakes")
-    (when (load "flymake" t)
-      (defun flymake-pyflakes-init ()
-        (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                           'flymake-create-temp-inplace))
-               (local-file (file-relative-name
-                            temp-file
-                            (file-name-directory buffer-file-name))))
-          (list "pyflakes" (list local-file))))
-      (add-to-list 'flymake-allowed-file-name-masks
-                   '("\\.py\\'" flymake-pyflakes-init)))
-    (add-hook 'python-mode-hook '(lambda () (flymake-mode 1)))
 
 ;; --------------
 (defvar LIMIT 1)
@@ -353,7 +332,6 @@
   (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
 ;; optional key binding
 
-
 ;; duplicate current line
 (defun duplicate-current-line (&optional n)
   "duplicate current line, make more than 1 copy given a numeric argument"
@@ -391,9 +369,9 @@
 
 
 
-  ;; integrate copy/paste with X
-  (setq x-select-enable-clipboard t)
-  (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+;; integrate copy/paste with X
+(setq x-select-enable-clipboard t)
+(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
 ;; ---
 (add-hook 'html-mode-hook
@@ -408,16 +386,15 @@
     (interactive)
     (switch-to-buffer (other-buffer)))
 
-
 ;; linum mode
 (require 'linum)
 (global-linum-mode 1)
 (add-hook 'linum-before-numbering-hook
   (lambda () (setq linum-format "%d ")))
 
+;; recent files
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
-    ;; recent files
-    (require 'recentf)
-    (recentf-mode 1)
-    (setq recentf-max-menu-items 25)
-    (global-set-key "\C-x\ \C-r" 'recentf-open-files)
