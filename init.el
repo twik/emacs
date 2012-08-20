@@ -98,7 +98,7 @@
 (when (eq system-type 'darwin)
     (setq ns-alternate-modifier 'meta)
     (setq mac-command-modifier 'none)
-    (require 'mac-key-mode    (mac-key-mode 1)
+    (require 'mac-key-mode    (mac-key-mode 1))
 )
 
 (setq x-select-enable-clipboard t)
