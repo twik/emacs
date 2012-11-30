@@ -8,8 +8,6 @@
 (global-set-key [M-f11] 'toggle-fullscreen)
 (global-set-key [A-f11] 'toggle-fullscreen)
 
-(global-set-key (kbd "RET") 'newline-and-indent)
-
 (global-set-key "\C-l" 'goto-line) ; [Ctrl]-[L]
 
 (global-set-key (kbd "C-x k") 'kill-current-buffer)
