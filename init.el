@@ -98,7 +98,6 @@
 (when (eq system-type 'darwin)
     (setq ns-alternate-modifier 'meta)
     (setq mac-command-modifier 'none)
-    (require 'mac-key-mode    (mac-key-mode 1))
 )
 
 (setq x-select-enable-clipboard t)
@@ -229,7 +228,6 @@
      (interactive)
      (load-file "~/.emacs.d/init.el")))
 
-(require 'redo+)
 
 (setq vc-follow-symlinks 1) ;; don't ask to follow a configuration simlink
 
@@ -397,4 +395,3 @@
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
-
